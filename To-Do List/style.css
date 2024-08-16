@@ -34,7 +34,7 @@ font-family: 'Poppins', sans-serif;
     display: flex;
 }
 
-.type{
+#type{
     height: 6vh;
     width:75% ;
     background-color: lightgray;
@@ -47,7 +47,7 @@ font-family: 'Poppins', sans-serif;
 
 }
 
-.add{
+#add{
     background-color: orange;
     border: none;
     width: 15%;
