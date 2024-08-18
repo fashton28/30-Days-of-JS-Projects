@@ -7,11 +7,13 @@ button.addEventListener("click",()=> {
     if(input.value === ""){
         alert("You must write something!")
     }else{  
-        const li = document.createElement("li")
-        const text = document.createTextNode(input.value);
+        let li = document.createElement("li")
+        let text = document.createTextNode(input.value);
         li.appendChild(text);
         ul.appendChild(li);
-        
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7";
+        li.appendChild(span);
 
 
     }

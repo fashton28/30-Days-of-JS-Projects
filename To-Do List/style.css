@@ -58,3 +58,19 @@ font-family: 'Poppins', sans-serif;
 ul{
     padding: 30px;
 }
+
+ul li{
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select:none;
+    cursor:pointer;
+}
+
+span{
+    position: absolute;
+    right:0;
+    top:5px;
+    height: 40px;
+
+}
