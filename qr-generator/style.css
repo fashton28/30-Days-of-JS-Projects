@@ -1,0 +1,42 @@
+*{
+  margin: 0 auto;
+  padding: 0;
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+} 
+/* note the use of asterisk */
+
+.container{
+  width: 100%;
+  height: 100vh;
+  background-color: beige;
+  display: flex;
+  align-items: center;
+ 
+}
+
+.small-container{
+
+  width: 400px;
+  background-color: white;
+  display: block;
+  border-radius: 10px;
+
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+}
+
+.input{
+  font-size: 22px;
+  margin: 10px;
+ 
+}
+
+.write {
+  display: flex;
+  justify-content: center;
+}
