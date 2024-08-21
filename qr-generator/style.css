@@ -4,6 +4,7 @@
   font-family: "Source Code Pro", monospace;
   font-optical-sizing: auto;
   font-style: normal;
+
 } 
 /* note the use of asterisk */
 
@@ -14,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, green, lightgreen);
 }
 
 .small-container {
@@ -25,6 +27,7 @@
   justify-content: center; /* Vertically center the items */
   border-radius: 10px;
   padding: 20px; /* Add some padding to give space inside the container */
+  background: linear-gradient(135deg, orange, yellow);
 }
 
 .smaller-container {
@@ -42,3 +45,20 @@
   gap: 25px; /* Add space between elements */
 }
 
+#button, img {
+  cursor: pointer;
+}
+
+#button{
+  font-size: 15px;
+  border-radius: 10px;
+  padding:10px;
+  border:none;
+}
+
+#input{
+  border: none;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 10px;
+}

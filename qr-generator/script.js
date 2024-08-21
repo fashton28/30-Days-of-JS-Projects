@@ -1,5 +1,7 @@
-document.addEventListener("onload", function(){
 
+document.addEventListener("DOMContentLoaded", function(){
+    let image = document.getElementById("img");
+    image.src = ''
 })
 
 
@@ -15,8 +17,12 @@ button.addEventListener("click", function() {
     let image = document.getElementById("img");
     image.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${input.value}`
 
+    image.addEventListener("click", function(){
+        window.open(input.value)
+    } )
+    
+
 
 
 })
 
- 
