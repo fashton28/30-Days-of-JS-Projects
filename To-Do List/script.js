@@ -1,54 +1,50 @@
-const button = document.getElementById("add");
-const ul = document.getElementById("list");
-const input = document.getElementById("type");
+const addForm = document.querySelector(".add");
+const ul = document.querySelector(".list-group");
+const search = document.querySelector(".search input")
 
-button.addEventListener("click",()=> {
 
-    if(input.value === ""){
-        alert("You must write something!")
-    }else{  
-        let li = document.createElement("li")
-        let text = document.createTextNode(input.value);
-        li.appendChild(text);
-        ul.appendChild(li);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
-
-        span.addEventListener("click", function(){
-            li.remove();
-        })
-
+const generateTemplate = (todo) => {
+    if(todo.length > 0) {
+        const html = `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span class = "white">${todo}</span>
+          <i class="far fa-trash-alt delete"></i>
+        </li>
+    `
+        ul.innerHTML += html
+    } else{
+        alert("You Need To Write Something!")
     }
-
-    input.value = " ";
-
     
+    
+}
 
-   
+
+addForm.addEventListener("submit", e => {
+
+    e.preventDefault()
+
+    const todo = addForm.add.value.trim();
+
+    generateTemplate(todo);
+    addForm.reset();
+
 })
 
-
-input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") { // Check if the pressed key is Enter
-        if (input.value === "") {
-            alert("You must write something!");
-        } else {  
-            let li = document.createElement("li");
-            let text = document.createTextNode(input.value);
-            li.appendChild(text);
-            ul.appendChild(li);
-
-            let span = document.createElement("span");
-            span.innerHTML = "\u00d7"; // "×" symbol for delete button
-            li.appendChild(span);
-
-            // Add event listener to the span to remove the list item
-            span.addEventListener("click", function() {
-                li.remove();
-            });
-
-            input.value = ""; // Clear the input field after adding the item
-        }
+ul.addEventListener("click", e => {
+    if(e.target.classList.contains('delete')){
+        e.target.parentElement.remove();
     }
 });
+
+//Search Algorithm
+
+//keyup events
+const filterTodos = (term) => {
+    console.log(term)
+}
+
+search.addEventListener("keyup", (e) => {
+    const term = search.value.trim();
+    filterTodos(e.target.value)
+})
