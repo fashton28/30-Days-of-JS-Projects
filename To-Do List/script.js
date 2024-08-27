@@ -41,10 +41,20 @@ ul.addEventListener("click", e => {
 
 //keyup events
 const filterTodos = (term) => {
-    console.log(term)
+    Array.from(ul.children)
+        .filter((todo) => !todo.textContent.includes(term))
+        .forEach((todo)=> {
+            todo.classList.add('filtered');
+        })
+
+    Array.from(ul.children)
+        .filter((todo) => todo.textContent.toLowerCase().includes(term))
+        .forEach((todo)=> {
+            todo.classList.remove('filtered');
+        })
 }
 
 search.addEventListener("keyup", (e) => {
-    const term = search.value.trim();
-    filterTodos(e.target.value)
+    const term = search.value.trim().toLowerCase();
+    filterTodos(term);
 })
