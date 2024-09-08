@@ -1,4 +1,5 @@
 
+
 const API_KEY = '1PXQx6HYtaeTNqyt0ATMW4TrUvBIsBsZ';
 const BASE_URL = 'http://dataservice.accuweather.com';
 
@@ -25,12 +26,18 @@ const titleElement = document.querySelector("h5");
 const conditionElement = document.querySelector(".condition");
 const time = document.querySelector("img.time");
 const icon = document.querySelector(".icon img");
-
+let timeSrc = null;
 
 const updateUI = (city, weather) => {
+    //Update temp, condition and city name
     conditionElement.textContent = weather.WeatherText;
     tempElement.textContent = weather.Temperature.Metric.Value;
     titleElement.textContent = city;
+    //update images
+    time.src = weather.IsDayTime ? "img//day.svg" : "img/night.svg";
+    
+    icon.src = `img/icons/${weather.WeatherIcon}.svg`
+
 };
 
 // Event handler
