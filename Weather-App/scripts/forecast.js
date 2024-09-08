@@ -20,6 +20,8 @@ const getWeather = (code) =>
 
 //UPDATING UI
 // DOM elements
+
+const card = document.querySelector(".card")
 const form = document.querySelector("form");
 const tempElement = document.getElementById("temp");
 const titleElement = document.querySelector("h5");
@@ -27,6 +29,7 @@ const conditionElement = document.querySelector(".condition");
 const time = document.querySelector("img.time");
 const icon = document.querySelector(".icon img");
 let timeSrc = null;
+card.style.display = 'none'
 
 const updateUI = (city, weather) => {
     //Update temp, condition and city name
@@ -37,7 +40,8 @@ const updateUI = (city, weather) => {
     time.src = weather.IsDayTime ? "img//day.svg" : "img/night.svg";
     
     icon.src = `img/icons/${weather.WeatherIcon}.svg`
-
+    
+    card.style.display = 'block'
 };
 
 // Event handler
