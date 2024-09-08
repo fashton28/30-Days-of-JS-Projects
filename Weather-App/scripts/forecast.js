@@ -1,56 +1,55 @@
-const key = '1PXQx6HYtaeTNqyt0ATMW4TrUvBIsBsZ'
 
-// create async function
+const API_KEY = '1PXQx6HYtaeTNqyt0ATMW4TrUvBIsBsZ';
+const BASE_URL = 'http://dataservice.accuweather.com';
 
-const getCity = async (city) => {
+// GET API functions
+const fetchData = async (url) => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+};
 
-    const base = "http://dataservice.accuweather.com/locations/v1/cities/search";
-    const query = `?apikey=${key}&q=${city}`
-    
-    const response = await fetch(base+query);
+const getCity = (city) => 
+    fetchData(`${BASE_URL}/locations/v1/cities/search?apikey=${API_KEY}&q=${city}`)
+        .then(data => data[0]?.Key);
 
-    const data = await response.json();
-    return(data[0].Key);
+const getWeather = (code) => 
+    fetchData(`${BASE_URL}/currentconditions/v1/${code}?apikey=${API_KEY}`)
+        .then(data => data[0]);
 
-}
-
-const getWeather = async (code) => {
-    const base = `http://dataservice.accuweather.com/currentconditions/v1/${code}`;
-    const query = `?apikey=${key}`;
-    const response = await fetch(base+query);
-    const data = await response.json();
-    return (data[0]);
-}
-
-
+//UPDATING UI
+// DOM elements
 const form = document.querySelector("form");
+const tempElement = document.getElementById("temp");
+const titleElement = document.querySelector("h5");
+const conditionElement = document.querySelector(".condition");
+const time = document.querySelector("img.time");
+const icon = document.querySelector(".icon img");
 
-const temp = document.getElementById("temp");
-const title = document.querySelector("h5");
-const condition = document.querySelector(".condition");
 
-form.addEventListener("submit", (e)=>{
+const updateUI = (city, weather) => {
+    conditionElement.textContent = weather.WeatherText;
+    tempElement.textContent = weather.Temperature.Metric.Value;
+    titleElement.textContent = city;
+};
+
+// Event handler
+const handleSubmit = async (e) => {
     e.preventDefault();
-        getCity(form.city.value.trim()).then(data =>{
-            getWeather(data).then(result =>{
-                condition.innerHTML = `${result.WeatherText}`;
-                temp.innerHTML = `${result.Temperature.Metric.Value}`;
-                title.innerHTML = `${form.city.value.trim()}`;
-                form.reset();
-            })
-        }).catch(err=>{
-            console.log("Could not fetch");
-        })
+    const city = form.city.value.trim();
 
-        
+    try {
+        const cityCode = await getCity(city);
+        if (!cityCode) throw new Error('City not found');
 
+        const weatherData = await getWeather(cityCode);
+        updateUI(city, weatherData);
+        form.reset();
+    } catch (error) {
+        console.error("Error fetching weather data:", error.message);
+        // You might want to show this error to the user in the UI
+    }
+};
 
-
-
-
-
-    
-        
-    
-    
-})
+// Event listener
+form.addEventListener("submit", handleSubmit);
